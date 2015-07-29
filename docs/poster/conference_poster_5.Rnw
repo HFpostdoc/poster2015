@@ -20,11 +20,11 @@
 
 \documentclass[a0,landscape]{a0poster}
 \setlength{\topmargin}{-1in}
-\setlength{\bottommargin}{-1in}
+ \setlength{\paperheight}{30.0in} % A0 height: 33.1in
 
 \usepackage{multicol} % This is so we can have multiple columns of text side-by-side 
-\columnsep=95pt % This is the amount of white space between the columns in the poster 
-\columnseprule=1pt % This is the thickness of the black line between the columns in the poster
+\columnsep=30pt % This is the amount of white space between the columns in the poster 
+\columnseprule=0pt % This is the thickness of the black line between the columns in the poster
 
 \usepackage[svgnames]{xcolor} % Specify colors by their 'svgnames',
                               % for a full list of all colors
@@ -87,7 +87,7 @@ Email: \texttt{matthewklau@fas.harvard.edu}\\ % Email address
 %	ABSTRACT
 %----------------------------------------------------------------------------------------
 
-\color{black} % Navy color for the abstract
+\color{DarkBlue} % Navy color for the abstract
 
 \section*{Summary}
   
@@ -234,10 +234,17 @@ n_t = \frac{w_t x_t}{c}
 %----------------------------------------------------------------------------------------
 
 \section*{Results}
+The model reproduces the basic features of the pitcher plant system:
+
+\begin{itemize}
+\item Photosynthesis oscillates daily.
+\item Decomposition takes 48 hours to complete.
+\item Hysteresis occurrs when the system is loaded with prey. 
+\end{itemize}
 
 
-\begin{block}{The model reproduces the basic features of the pitcher plant system.}
-\setkeys{Gin}{width=0.95\linewidth}
+\begin{block}{}
+\setkeys{Gin}{width=0.90\linewidth}
 
 <<base,fig=TRUE,echo=FALSE>>=
 source('~/projects/HF/fastslow/bin/summer2015/Project/Models(Done)/pme.R')
@@ -274,7 +281,7 @@ abline(h=max(hyst$Oxygen[1:1440]),lty=2)
 \end{block}
 
 \begin{block}
-\setkeys{Gin}{width=0.9\linewidth}  
+\setkeys{Gin}{width=0.7\linewidth}  
 <<sens,fig=true,echo=FALSE,eval=TRUE>>=
 ### for each parameter set, use the no prey control 
 ### to get the sd for each simulation
@@ -284,6 +291,7 @@ if (all(ls() != 'simO2')){simO2 <- read.csv('~/projects/HF/fastslow/results/ppSi
 ### Sort out the parameters
 ### from the column names.
 
+if (all(ls() != 'mmO2')){
 foodWeight <- sapply(seq(0,10,by=1),function(x) c(0,rep(x,7),rep(0,7)))
 
 params <- colnames(simO2)
@@ -319,6 +327,7 @@ d.scaled <- (d.scaled + 0.1) / max((d.scaled + 0.1) )
 b.scaled <- (params[,3] + abs(min(params[,3]))) / max((params[,3] + abs(min(params[,3]))))
 param.col <- apply(cbind(param.col,d.scaled),1,function(x) add.alpha(x[1],x[2]))
 mmO2 <- apply(difO2,1,max) - apply(difO2,1,min)
+}
 
 plot(varO2~mmO2,pch=19,cex=(1.5*b.scaled)^2,col=param.col)
 
@@ -335,9 +344,6 @@ plot(varO2~mmO2,pch=19,cex=(1.5*b.scaled)^2,col=param.col)
 \section*{Conclusions}
 
 \begin{itemize}
-\item The pattern of daily O$_2$ production, decomposition and
-  hysteresis are consistent with empirical observations of
-  \textit{S. purpurea}
 \item Exploration of the parameter space for the model supports the
   presence of alternative states and the potential for tipping points
   resulting from the impact of the rate of decomposition and
@@ -347,9 +353,8 @@ plot(varO2~mmO2,pch=19,cex=(1.5*b.scaled)^2,col=param.col)
   using snap-shot data to compare the temporal scale of these flow
   rates can help to detect systems prone to critical transitions.
 \item We are currently developing a toolbox for exploring ecosystems
-  models using a web-based dynamic modeling framework. The open-source
-  software and information on how to use the application can be found
-  at:  https://github.com/HarvardForest/ecoapps.
+  models using a web-based dynamic modeling framework available at:
+  https://github.com/HarvardForest/ecoapps.
 \end{itemize}
 
 \color{DarkSlateGray} % Set the color back to DarkSlateGray for the rest of the content

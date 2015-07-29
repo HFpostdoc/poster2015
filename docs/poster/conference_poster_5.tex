@@ -20,11 +20,11 @@
 
 \documentclass[a0,landscape]{a0poster}
 \setlength{\topmargin}{-1in}
-\setlength{\bottommargin}{-1in}
+ \setlength{\paperheight}{30.0in} % A0 height: 33.1in
 
 \usepackage{multicol} % This is so we can have multiple columns of text side-by-side 
-\columnsep=95pt % This is the amount of white space between the columns in the poster 
-\columnseprule=1pt % This is the thickness of the black line between the columns in the poster
+\columnsep=30pt % This is the amount of white space between the columns in the poster 
+\columnseprule=0pt % This is the thickness of the black line between the columns in the poster
 
 \usepackage[svgnames]{xcolor} % Specify colors by their 'svgnames',
                               % for a full list of all colors
@@ -88,7 +88,7 @@ Email: \texttt{matthewklau@fas.harvard.edu}\\ % Email address
 %	ABSTRACT
 %----------------------------------------------------------------------------------------
 
-\color{black} % Navy color for the abstract
+\color{DarkBlue} % Navy color for the abstract
 
 \section*{Summary}
   
@@ -235,10 +235,17 @@ n_t = \frac{w_t x_t}{c}
 %----------------------------------------------------------------------------------------
 
 \section*{Results}
+The model reproduces the basic features of the pitcher plant system:
+
+\begin{itemize}
+\item Photosynthesis oscillates daily.
+\item Decomposition takes 48 hours to complete.
+\item Hysteresis occurrs when the system is loaded with prey. 
+\end{itemize}
 
 
-\begin{block}{The model reproduces the basic features of the pitcher plant system.}
-\setkeys{Gin}{width=0.95\linewidth}
+\begin{block}{}
+\setkeys{Gin}{width=0.90\linewidth}
 
 \includegraphics{conference_poster_5-base}
 
@@ -252,7 +259,7 @@ n_t = \frac{w_t x_t}{c}
 \end{block}
 
 \begin{block}
-\setkeys{Gin}{width=0.9\linewidth}  
+\setkeys{Gin}{width=0.7\linewidth}  
 \includegraphics{conference_poster_5-sens}
 
 \end{block}
@@ -266,9 +273,6 @@ n_t = \frac{w_t x_t}{c}
 \section*{Conclusions}
 
 \begin{itemize}
-\item The pattern of daily O$_2$ production, decomposition and
-  hysteresis are consistent with empirical observations of
-  \textit{S. purpurea}
 \item Exploration of the parameter space for the model supports the
   presence of alternative states and the potential for tipping points
   resulting from the impact of the rate of decomposition and
@@ -278,9 +282,8 @@ n_t = \frac{w_t x_t}{c}
   using snap-shot data to compare the temporal scale of these flow
   rates can help to detect systems prone to critical transitions.
 \item We are currently developing a toolbox for exploring ecosystems
-  models using a web-based dynamic modeling framework. The open-source
-  software and information on how to use the application can be found
-  at:  https://github.com/HarvardForest/ecoapps.
+  models using a web-based dynamic modeling framework available at:
+  https://github.com/HarvardForest/ecoapps.
 \end{itemize}
 
 \color{DarkSlateGray} % Set the color back to DarkSlateGray for the rest of the content
