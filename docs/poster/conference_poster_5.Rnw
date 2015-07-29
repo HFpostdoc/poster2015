@@ -19,8 +19,8 @@
 %----------------------------------------------------------------------------------------
 
 \documentclass[a0,landscape]{a0poster}
-\setlength{\topmargin}{-0.5in}
-\setlength{\bottommargin}{-0.5in}
+\setlength{\topmargin}{-1in}
+\setlength{\bottommargin}{-1in}
 
 \usepackage{multicol} % This is so we can have multiple columns of text side-by-side 
 \columnsep=95pt % This is the amount of white space between the columns in the poster 
@@ -212,18 +212,18 @@ n_t = \frac{w_t x_t}{c}
 
 %% $R^2 = $ \Sexpr{0.52*0.21}
 
-\begin{center}\vspace{1cm}
-\begin{tabular}{l l l l}
-\toprule
-\textbf{Parameter} & \textbf{Min} & \textbf{Max} \\
-\midrule
-$w$ (prey mass) & 0 & 10 \\
-$\beta$ (decomp rate) & 0.001 & 0.011 \\
-$d$ (inflection point) & -5 & 5 \\
-\bottomrule
-\end{tabular}
-\captionof{table}{\color{Green} Parameter ranges for simulations.}
-\end{center}\vspace{1cm}
+%% \begin{center}\vspace{1cm}
+%% \begin{tabular}{l l l l}
+%% \toprule
+%% \textbf{Parameter} & \textbf{Min} & \textbf{Max} \\
+%% \midrule
+%% $w$ (prey mass) & 0 & 10 \\
+%% $\beta$ (decomp rate) & 0.001 & 0.011 \\
+%% $d$ (inflection point) & -5 & 5 \\
+%% \bottomrule
+%% \end{tabular}
+%% \captionof{table}{\color{Green} Parameter ranges for simulations.}
+%% \end{center}\vspace{1cm}
 
 
 
@@ -253,16 +253,21 @@ legend('topright',legend=c('Photosynthesis','Prey'),lty=c(1,2),box.col='grey')
 \end{block}
 
 
-\begin{block}{Hysteresis}
+\begin{block}{}
 \setkeys{Gin}{width=0.9\linewidth}
 <<hyst,fig=true,echo=false>>=
 if (all(ls()!='hyst')){
-hyst <- pitcherPlantSim(20,
-                        foodWeight=c(rep(0,1),rep(5,9),rep(0,10)),
-                        beta=0.0001)
+hyst <- pitcherPlantSim(30,
+                        foodWeight=c(rep(0,1),rep(5,9),rep(0,20)),
+                        beta=0.00001)
 }
 
-plot(hyst$Oxygen,xlab='Time (min.)',ylab='Pitcher Oxygen',type='l')
+plot(hyst$Oxygen,xlab='Time (min.)',ylab='Pitcher Oxygen',type='l',
+     ylim=c(30,32)
+     )
+abline(v=seq(I(720 + 1440),I(720 + 1440*5),by=1),col=add.alpha('grey',0.01),lty=1)
+lines(hyst$Oxygen)
+abline(h=max(hyst$Oxygen[1:1440]),lty=2)
 
 @ 
 
@@ -270,7 +275,7 @@ plot(hyst$Oxygen,xlab='Time (min.)',ylab='Pitcher Oxygen',type='l')
 
 \begin{block}
 \setkeys{Gin}{width=0.9\linewidth}  
-<<sens,fig=true,echo=FALSE>>=
+<<sens,fig=true,echo=FALSE,eval=TRUE>>=
 ### for each parameter set, use the no prey control 
 ### to get the sd for each simulation
 
@@ -330,16 +335,21 @@ plot(varO2~mmO2,pch=19,cex=(1.5*b.scaled)^2,col=param.col)
 \section*{Conclusions}
 
 \begin{itemize}
-\item As the rate of decomposition slows such that the release of
-  nutrients overlaps with the next addition of prey, the negative
-  feedback of biological oxygen demand increases. 
-\item Hysteresis occurs because of the lag in decomposition producing
-  a lag in the transition from one state to another after prey
-  addition is reduced.
+\item The pattern of daily O$_2$ production, decomposition and
+  hysteresis are consistent with empirical observations of
+  \textit{S. purpurea}
+\item Exploration of the parameter space for the model supports the
+  presence of alternative states and the potential for tipping points
+  resulting from the impact of the rate of decomposition and
+  photosynthesitic augmentation.
 \item These results suggest that identifying the flow of important
   components (e.g., nutrients) among compartments in ecosystems and
   using snap-shot data to compare the temporal scale of these flow
   rates can help to detect systems prone to critical transitions.
+\item We are currently developing a toolbox for exploring ecosystems
+  models using a web-based dynamic modeling framework. The open-source
+  software and information on how to use the application can be found
+  at:  https://github.com/HarvardForest/ecoapps.
 \end{itemize}
 
 \color{DarkSlateGray} % Set the color back to DarkSlateGray for the rest of the content
@@ -348,12 +358,8 @@ plot(varO2~mmO2,pch=19,cex=(1.5*b.scaled)^2,col=param.col)
 %	FORTHCOMING RESEARCH
 %----------------------------------------------------------------------------------------
 
-\section*{Forthcoming}
+%% \section*{Forthcoming}
 
-We are currently developing a toolbox for exploring ecosystems models
-using a web-based dynamic modeling framework. The open-source software
-and information on how to use the application can be found at:
-https://github.com/HarvardForest/ecoapps.
 
 %----------------------------------------------------------------------------------------
 %	REFERENCES
@@ -369,7 +375,9 @@ https://github.com/HarvardForest/ecoapps.
 
 \section*{Acknowledgements}
 
-Etiam fermentum, arcu ut gravida fringilla, dolor arcu laoreet justo, ut imperdiet urna arcu a arcu. Donec nec ante a dui tempus consectetur. Cras nisi turpis, dapibus sit amet mattis sed, laoreet.
+Thanks are owed to a number of collaborators, including B. Baiser
+(UFL), N. Gotelli (UVM) and A. Northrop (UVM). Funding was provided by
+NSF Grant (XXX-XXXX). 
 
 %----------------------------------------------------------------------------------------
 
