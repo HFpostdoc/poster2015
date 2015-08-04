@@ -1,0 +1,29 @@
+PS 88-86
+Temporal scales of coupled ecosystem processes provide a benchmark for
+alternate ecosystem states: Photosynthesis and decomposition in a
+model micro-ecosystem
+Friday, August 14, 2015
+Exhibit Hall, Baltimore Convention Center
+Matthew Lau, Harvard Forest, Harvard University, Petersham, MA, USA
+Aaron M. Ellison, Harvard Forest, Harvard University, Petersham, MA,
+USA
+Background/Question/Methods
+Community dynamics can lead to sudden or recalcitrant ecosystem state
+changes, but our understanding of the general properties and our
+ability to predict would benefit greatly from a model system that
+permits both realistic models and manipulative studies. Here, we
+further develop and apply a micro-ecosystem model based on the food
+web of the pitcher forming carnivorous, Northern Pitcher Plant,
+Sarracenia purpurea, to simulate oxygen production of how press
+perturbations lead to ecosystem state changes.
+Results/Conclusions
+We found three main results:  1. The micro-ecosystem model reproduced
+the gross behavior of the pitcher plant food web. 2. Sensitivity
+analysis revealed several parameter combinations that lead to an
+alternative state for oxygen production. 3. Furthermore, the parameter
+combinations leading to the alternative state depended on the
+difference in temporal scale of the photosynthesis and decomposition
+rates. These results point to a general framework for identifying
+potential ecosystem state changes. In particular, the identification
+of interacting processes that may operate at different temporal scales
+provides a predictive benchmark for alternate ecosystem states.
