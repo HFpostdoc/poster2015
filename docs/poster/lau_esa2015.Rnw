@@ -23,7 +23,7 @@
 \setlength{\topmargin}{-2cm}
 
 \usepackage{multicol} % This is so we can have multiple columns of text side-by-side 
-\columnsep=100pt % This is the amount of white space between the columns in the poster 
+\columnsep=90pt % This is the amount of white space between the columns in the poster 
 \columnseprule=0pt % This is the thickness of the black line between the columns in the poster
 
 \usepackage[svgnames]{xcolor} % Specify colors by their 'svgnames',
@@ -76,7 +76,7 @@ Email: \texttt{matthewklau@fas.harvard.edu}\\ % Email address
 %% \includegraphics[width=10cm]{harvard.png} % Logo or a photo of you, adjust its dimensions here
 \end{minipage}
 
-%% \vspace{1cm} % A bit of extra whitespace between the header and poster
+\vspace{3cm} % A bit of extra whitespace between the header and poster
              % content
 
 %----------------------------------------------------------------------------------------
@@ -89,26 +89,25 @@ Email: \texttt{matthewklau@fas.harvard.edu}\\ % Email address
 
 \color{DarkBlue} % Navy color for the abstract
 
-\section*{Summary}
+\section*{Background and Overview}
   
   \begin{itemize}
-  \item Community dynamics can lead to sudden, recalcitrant ecosystem
-    state changes (aka. tipping points),
-  \item Here, we further develop and apply the micro-ecosystem model
-    based on the food web of the carnivorous plant, \textit{Sarracenia
-      purpurea}, to simulate oxygen production of how perturbations
-    lead to ecosystem state changes,
+  \item Ecosystem dynamics can lead to sudden, recalcitrant state changes,
+  \item Here, we further develop and apply an ecosystem model based on
+    the food web of the carnivorous plant, \textit{Sarracenia
+      purpurea}, to simulate oxygen production and explore the impact
+    of simultaneously altering key parameters,
   \item We found three main results:
     \begin{enumerate}
-    \item The micro-ecosystem model reproduced the gross behavior of
-      the pitcher plant food web
+    \item The micro-ecosystem model reproduced key behaviors of
+      the real pitcher plant food web
     \item Sensitivity analysis revealed parameter combinations that
       produce alternative ecosystem states
     \item Differences in photosynthesis and decomposition rates lead
       to both alternative states and hyesteresis,
     \end{enumerate}
-  \item These results point to a general framework for identifying
-    potential ecosystem state changes. 
+  \item These results support previous findings that the timing of
+    processes can lead to shifts in ecosystem state. 
   \end{itemize}
 
 %----------------------------------------------------------------------------------------
@@ -145,89 +144,44 @@ Email: \texttt{matthewklau@fas.harvard.edu}\\ % Email address
 %------------------------------------------------
 
 \begin{center}
-\includegraphics[width=0.85\linewidth]{spfoodweb}
+\includegraphics[width=0.75\linewidth]{spfoodweb}
 \captionof{figure}{Pitcher plant and food web.}
 \end{center}
 
-\subsection*{The model and simulations}
+\subsection*{Pitcher Plant Micro-Ecosystem Model}
 
-The general model for alternative stable states:
+A general model that produces alternative ecosystem states can be
+represented as: $\frac{dx}{dt} = a - bx + r f(x)$. Where, $x$ =
+observed variable, $a$ = positively correlated state variable, $b$ =
+negatively correlated state variable, $rf(x)$ = positive feedback
+loop, where $r$ controls the rate and $f(x)$ determines the shape of
+the state transition.
 
-\begin{equation}
-\frac{dx}{dt} = a - bx + r f(x)
-\label{eqn:carpenter}
-\end{equation}
-
-
-\begin{itemize}
-\item $x$ = observed variable
-\item $a$ = positively correlated state variable
-\item $b$ = negatively correlated state variable
-\item $rf(x)$ = positive feedback loop, where $r$ controls the rate
-  and $f(x)$ determines the shape of the state transition
-\end{itemize}
-
-The pitcher plant micro-ecosystem model:
-
-\begin{equation}
-x_{t+1} = a_t A_t - \left\{m + a_t \frac{w+t}{K + w_t}\right\} +
-D_t(x_t)
-\label{eqn:ppme}
-\end{equation}
-
-
-
-\begin{equation}
-  A = A_{max} \left\{ 1 - e^{-0.3 (PAR - LCP)} \right\} 
-  \label{eqn:photosynthesis}
-\end{equation}
-
-\begin{equation}
-PAR = c \sin(2 \pi f)
-\label{eqn:PAR}
-\end{equation}
-
-\begin{equation}
-w_t = e^{-\beta w_0 t}
-\label{eqn:decomp}
-\end{equation}
-
-\begin{equation}
-a_t+1 = a_t \left\{ \frac{a'_{max}-a'_{min}}{1+e^{-s n_t - d}} + a'_{min}\right\}
-\label{eqn:oxygenation}
-\end{equation}
-
-%% $R^2 = $ \Sexpr{0.52*0.21}
+%% R^2 = $ \Sexpr{0.52*0.21}
 
 \begin{center}\vspace{1cm}
 \begin{tabular}{l l}
 \toprule
 \textbf{Component} & Equation \\
 \midrule
- &  &  \\
+Oxygen & $x_{t+1} = a_t A_t - \left\{m + a_t \frac{w+t}{K + w_t}\right\} + D_t(x_t)$ \\
+Photosynthesis & $  A = A_{max} \left\{ 1 - e^{-0.3 (PAR - LCP)} \right\} $\\
+PAR & $PAR = c \sin(2 \pi f)$\\
+Decomposition & $w_t = e^{-\beta w_0 t}$\\
+Oxygenation & $a_t+1 = a_t \left\{ \frac{a'_{max}-a'_{min}}{1+e^{-s n_t - d}} + a'_{min}\right\}$ \\
 Nutrient Release & $n_t = \frac{w_t x_t}{c}$ \\
 \bottomrule
 \end{tabular}
 \captionof{table}{The \textit{S. purpurea} micro-ecosystem model.}
 \end{center}\vspace{1cm}
 
+\subsection*{Sensitivity Analysis Simulations}
 
-\begin{center}\vspace{1cm}
-\begin{tabular}{l l l l}
-\toprule
-\textbf{Parameter} & \textbf{Min} & \textbf{Max} \\
-\midrule
-$w$ (prey mass) & 0 & 10 \\
-$\beta$ (decomp rate) & 0.001 & 0.011 \\
-$d$ (inflection point) & -5 & 5 \\
-\bottomrule
-\end{tabular}
-\captionof{table}{\color{Green} Parameter ranges for simulations.}
-\end{center}\vspace{1cm}
-
-
-
-
+Because the micro-ecosystem model is a coupled, non-linear dynamic
+equation, we conducted simulations in which we variaed three key
+parameters in the model: $w$ the prey mass added, $\beta$ the
+decomposition rate and $d$ the inflection point of the nutrient
+augmentation function. 
 
 %----------------------------------------------------------------------------------------
 %	RESULTS 
@@ -383,9 +337,9 @@ plot(varO2~mmO2,pch=19,cex=(1.5*b.scaled)^2,col=param.col,
 %	REFERENCES
 %----------------------------------------------------------------------------------------
 
-\nocite{*} % Print all references regardless of whether they were cited in the poster or not
-\bibliographystyle{plain} % Plain referencing style
-\bibliography{sample} % Use the example bibliography file sample.bib
+%% \nocite{*} % Print all references regardless of whether they were cited in the poster or not
+%% \bibliographystyle{plain} % Plain referencing style
+%% \bibliography{sample} % Use the example bibliography file sample.bib
 
 %----------------------------------------------------------------------------------------
 %	ACKNOWLEDGEMENTS
@@ -398,6 +352,8 @@ Thanks are owed to a number of collaborators, including B. Baiser
 NSF Grant DEB 11-44056. 
 
 %----------------------------------------------------------------------------------------
+
+\vspace{-2cm}
 
 \end{multicols}
 \end{document}
