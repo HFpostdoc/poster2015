@@ -19,11 +19,11 @@
 %----------------------------------------------------------------------------------------
 
 \documentclass[a0,landscape]{a0poster}
-\setlength{\topmargin}{-1in}
- \setlength{\paperheight}{30.0in} % A0 height: 33.1in
+
+\setlength{\topmargin}{-2cm}
 
 \usepackage{multicol} % This is so we can have multiple columns of text side-by-side 
-\columnsep=30pt % This is the amount of white space between the columns in the poster 
+\columnsep=100pt % This is the amount of white space between the columns in the poster 
 \columnseprule=0pt % This is the thickness of the black line between the columns in the poster
 
 \usepackage[svgnames]{xcolor} % Specify colors by their 'svgnames',
@@ -43,7 +43,7 @@
 
 \usepackage{Sweave}
 \begin{document}
-\input{conference_poster_5-concordance}
+\input{lau_esa2015-concordance}
 
 %----------------------------------------------------------------------------------------
 %	POSTER HEADER 
@@ -77,12 +77,12 @@ Email: \texttt{matthewklau@fas.harvard.edu}\\ % Email address
 %% \includegraphics[width=10cm]{harvard.png} % Logo or a photo of you, adjust its dimensions here
 \end{minipage}
 
-\vspace{1cm} % A bit of extra whitespace between the header and poster
+%% \vspace{1cm} % A bit of extra whitespace between the header and poster
              % content
 
 %----------------------------------------------------------------------------------------
 
-\begin{multicols}{4} % This is how many columns your poster will be broken into, a poster with many figures may benefit from less columns whereas a text-heavy poster benefits from more
+\begin{multicols}{3} % This is how many columns your poster will be broken into, a poster with many figures may benefit from less columns whereas a text-heavy poster benefits from more
 
 %----------------------------------------------------------------------------------------
 %	ABSTRACT
@@ -145,17 +145,10 @@ Email: \texttt{matthewklau@fas.harvard.edu}\\ % Email address
 
 %------------------------------------------------
 
-\subsection*{The pitcher plant micro-ecosystem}
-
-\begin{itemize}
-\item History of research (Darwin to Sirota)
-\item Ideal for studying food-web dynamics
-\end{itemize}
-
-\begin{center}\vspace{1cm}
-\includegraphics[width=0.95\linewidth]{spfoodweb}
-\captionof{figure}{\color{Green} Pitcher plant and food web.}
-\end{center}\vspace{1cm}
+\begin{center}
+\includegraphics[width=0.85\linewidth]{spfoodweb}
+\captionof{figure}{Pitcher plant and food web.}
+\end{center}
 
 \subsection*{The model and simulations}
 
@@ -205,26 +198,39 @@ a_t+1 = a_t \left\{ \frac{a'_{max}-a'_{min}}{1+e^{-s n_t - d}} + a'_{min}\right\
 \label{eqn:oxygenation}
 \end{equation}
 
-\begin{equation}
-n_t = \frac{w_t x_t}{c}
-\label{eqn:nutrients}
-\end{equation}
+%% \begin{equation}
+%% n_t = \frac{w_t x_t}{c}
+%% \label{eqn:nutrients}
+%% \end{equation}
 
 
 %% $R^2 = $ 0.1092
 
-%% \begin{center}\vspace{1cm}
-%% \begin{tabular}{l l l l}
-%% \toprule
-%% \textbf{Parameter} & \textbf{Min} & \textbf{Max} \\
-%% \midrule
-%% $w$ (prey mass) & 0 & 10 \\
-%% $\beta$ (decomp rate) & 0.001 & 0.011 \\
-%% $d$ (inflection point) & -5 & 5 \\
-%% \bottomrule
-%% \end{tabular}
-%% \captionof{table}{\color{Green} Parameter ranges for simulations.}
-%% \end{center}\vspace{1cm}
+\begin{center}\vspace{1cm}
+\begin{tabular}{l l}
+\toprule
+\textbf{Component} & Equation \\
+\midrule
+ &  &  \\
+Nutrient Release & $n_t = \frac{w_t x_t}{c}$ \\
+\bottomrule
+\end{tabular}
+\captionof{table}{The \textit{S. purpurea} micro-ecosystem model.}
+\end{center}\vspace{1cm}
+
+
+\begin{center}\vspace{1cm}
+\begin{tabular}{l l l l}
+\toprule
+\textbf{Parameter} & \textbf{Min} & \textbf{Max} \\
+\midrule
+$w$ (prey mass) & 0 & 10 \\
+$\beta$ (decomp rate) & 0.001 & 0.011 \\
+$d$ (inflection point) & -5 & 5 \\
+\bottomrule
+\end{tabular}
+\captionof{table}{\color{Green} Parameter ranges for simulations.}
+\end{center}\vspace{1cm}
 
 
 
@@ -235,33 +241,36 @@ n_t = \frac{w_t x_t}{c}
 %----------------------------------------------------------------------------------------
 
 \section*{Results}
-The model reproduces the basic features of the pitcher plant system:
-
-\begin{itemize}
-\item Photosynthesis oscillates daily.
-\item Decomposition takes 48 hours to complete.
-\item Hysteresis occurrs when the system is loaded with prey. 
-\end{itemize}
-
 
 \begin{block}{}
-\setkeys{Gin}{width=0.90\linewidth}
+\setkeys{Gin}{width=0.65\linewidth}
+\begin{center}
 
-\includegraphics{conference_poster_5-base}
+\includegraphics{lau_esa2015-base}
+
+\captionof{figure}{The pitcher plant micro-ecosystem model exhibited several
+behaviors similar to those of real \textit{S. purpurea} pitcher
+plants, including: dirunal cycling of $O_2$ and 48 hours to complete
+decomposition of prey (inset plot), altered $O_2$ production with prey
+addition (grey region), hysteresis occurs when prey addition stops
+(time = 9360 min).}
+ 
+\end{center}
 
 \end{block}
 
 
-\begin{block}{}
-\setkeys{Gin}{width=0.9\linewidth}
-\includegraphics{conference_poster_5-hyst}
-
-\end{block}
 
 \begin{block}
-\setkeys{Gin}{width=0.7\linewidth}  
-\includegraphics{conference_poster_5-sens}
+\setkeys{Gin}{width=0.65\linewidth}  
+\begin{center}
+  
+\includegraphics{lau_esa2015-sens}
 
+\captionof{figure}{The variance and range of the $O_2$ dynamics were
+  affected by prey mass (\textit{w}) added (color: red = 0 to blue=10), the decomposition rate ($\beta$) (size: smallest = 0.001 to largest = 0.011) and the inflection point (\textit{d}) of $O_2$ augmentation (opacity: lightest = -5 to darkest = 5).}
+
+\end{center}
 \end{block}
 
 %----------------------------------------------------------------------------------------

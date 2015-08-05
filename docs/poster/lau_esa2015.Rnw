@@ -19,11 +19,11 @@
 %----------------------------------------------------------------------------------------
 
 \documentclass[a0,landscape]{a0poster}
-\setlength{\topmargin}{-1in}
- \setlength{\paperheight}{30.0in} % A0 height: 33.1in
+
+\setlength{\topmargin}{-2cm}
 
 \usepackage{multicol} % This is so we can have multiple columns of text side-by-side 
-\columnsep=30pt % This is the amount of white space between the columns in the poster 
+\columnsep=100pt % This is the amount of white space between the columns in the poster 
 \columnseprule=0pt % This is the thickness of the black line between the columns in the poster
 
 \usepackage[svgnames]{xcolor} % Specify colors by their 'svgnames',
@@ -76,12 +76,12 @@ Email: \texttt{matthewklau@fas.harvard.edu}\\ % Email address
 %% \includegraphics[width=10cm]{harvard.png} % Logo or a photo of you, adjust its dimensions here
 \end{minipage}
 
-\vspace{1cm} % A bit of extra whitespace between the header and poster
+%% \vspace{1cm} % A bit of extra whitespace between the header and poster
              % content
 
 %----------------------------------------------------------------------------------------
 
-\begin{multicols}{4} % This is how many columns your poster will be broken into, a poster with many figures may benefit from less columns whereas a text-heavy poster benefits from more
+\begin{multicols}{3} % This is how many columns your poster will be broken into, a poster with many figures may benefit from less columns whereas a text-heavy poster benefits from more
 
 %----------------------------------------------------------------------------------------
 %	ABSTRACT
@@ -144,17 +144,10 @@ Email: \texttt{matthewklau@fas.harvard.edu}\\ % Email address
 
 %------------------------------------------------
 
-\subsection*{The pitcher plant micro-ecosystem}
-
-\begin{itemize}
-\item History of research (Darwin to Sirota)
-\item Ideal for studying food-web dynamics
-\end{itemize}
-
-\begin{center}\vspace{1cm}
-\includegraphics[width=0.95\linewidth]{spfoodweb}
-\captionof{figure}{\color{Green} Pitcher plant and food web.}
-\end{center}\vspace{1cm}
+\begin{center}
+\includegraphics[width=0.85\linewidth]{spfoodweb}
+\captionof{figure}{Pitcher plant and food web.}
+\end{center}
 
 \subsection*{The model and simulations}
 
@@ -204,26 +197,33 @@ a_t+1 = a_t \left\{ \frac{a'_{max}-a'_{min}}{1+e^{-s n_t - d}} + a'_{min}\right\
 \label{eqn:oxygenation}
 \end{equation}
 
-\begin{equation}
-n_t = \frac{w_t x_t}{c}
-\label{eqn:nutrients}
-\end{equation}
-
-
 %% $R^2 = $ \Sexpr{0.52*0.21}
 
-%% \begin{center}\vspace{1cm}
-%% \begin{tabular}{l l l l}
-%% \toprule
-%% \textbf{Parameter} & \textbf{Min} & \textbf{Max} \\
-%% \midrule
-%% $w$ (prey mass) & 0 & 10 \\
-%% $\beta$ (decomp rate) & 0.001 & 0.011 \\
-%% $d$ (inflection point) & -5 & 5 \\
-%% \bottomrule
-%% \end{tabular}
-%% \captionof{table}{\color{Green} Parameter ranges for simulations.}
-%% \end{center}\vspace{1cm}
+\begin{center}\vspace{1cm}
+\begin{tabular}{l l}
+\toprule
+\textbf{Component} & Equation \\
+\midrule
+ &  &  \\
+Nutrient Release & $n_t = \frac{w_t x_t}{c}$ \\
+\bottomrule
+\end{tabular}
+\captionof{table}{The \textit{S. purpurea} micro-ecosystem model.}
+\end{center}\vspace{1cm}
+
+
+\begin{center}\vspace{1cm}
+\begin{tabular}{l l l l}
+\toprule
+\textbf{Parameter} & \textbf{Min} & \textbf{Max} \\
+\midrule
+$w$ (prey mass) & 0 & 10 \\
+$\beta$ (decomp rate) & 0.001 & 0.011 \\
+$d$ (inflection point) & -5 & 5 \\
+\bottomrule
+\end{tabular}
+\captionof{table}{\color{Green} Parameter ranges for simulations.}
+\end{center}\vspace{1cm}
 
 
 
@@ -234,40 +234,25 @@ n_t = \frac{w_t x_t}{c}
 %----------------------------------------------------------------------------------------
 
 \section*{Results}
-The model reproduces the basic features of the pitcher plant system:
-
-\begin{itemize}
-\item Photosynthesis oscillates daily.
-\item Decomposition takes 48 hours to complete.
-\item Hysteresis occurrs when the system is loaded with prey. 
-\end{itemize}
-
 
 \begin{block}{}
-\setkeys{Gin}{width=0.90\linewidth}
+\setkeys{Gin}{width=0.65\linewidth}
+\begin{center}
 
 <<base,fig=TRUE,echo=FALSE>>=
+library(Hmisc)
 source('~/projects/HF/fastslow/bin/summer2015/Project/Models(Done)/pme.R')
 source('~/projects/HF/fastslow/src/global.R')
 phot <- pitcherPlantSim(2,beta=0.003,foodWeight=c(0,0))$Photosynthesis
 deco <- pitcherPlantSim(2,beta=0.003,foodWeight=c(5,0))$'Food Amount'
-plot(phot,xlab='Minute',ylab='State Variable',type='l',ylim=c(0,max(c(phot,deco))))
-lines(deco,lty=2)
-legend('topright',legend=c('Photosynthesis','Prey'),lty=c(1,2),box.col='grey')
 
-@ 
-
-\end{block}
-
-
-\begin{block}{}
-\setkeys{Gin}{width=0.9\linewidth}
-<<hyst,fig=true,echo=false>>=
 if (all(ls()!='hyst')){
 hyst <- pitcherPlantSim(30,
                         foodWeight=c(rep(0,1),rep(5,9),rep(0,20)),
                         beta=0.00001)
 }
+
+op <- par()
 
 plot(hyst$Oxygen,xlab='Time (min.)',ylab='Pitcher Oxygen',type='l',
      ylim=c(30,32)
@@ -276,12 +261,35 @@ abline(v=seq(I(720 + 1440),I(720 + 1440*5),by=1),col=add.alpha('grey',0.01),lty=
 lines(hyst$Oxygen)
 abline(h=max(hyst$Oxygen[1:1440]),lty=2)
 
+tmp <- subplot(plot(phot,xlab='Minute',ylab='State Variable',type='l',ylim=c(0,max(c(phot,deco)))),
+               cnvrt.coords(0.60,0.55,'plt')$usr, vadj=0, hadj=0,size=c(1.7,1.7)
+)
+
+par(tmp)
+lines(deco,lty=2)
+legend('topright',legend=c('Photosynthesis','Prey'),lty=c(1,2),border='n',cex=0.5)
+
+par(op)
+
 @ 
+
+\captionof{figure}{The pitcher plant micro-ecosystem model exhibited several
+behaviors similar to those of real \textit{S. purpurea} pitcher
+plants, including: dirunal cycling of $O_2$ and 48 hours to complete
+decomposition of prey (inset plot), altered $O_2$ production with prey
+addition (grey region), hysteresis occurs when prey addition stops
+(time = 9360 min).}
+ 
+\end{center}
 
 \end{block}
 
+
+
 \begin{block}
-\setkeys{Gin}{width=0.7\linewidth}  
+\setkeys{Gin}{width=0.65\linewidth}  
+\begin{center}
+  
 <<sens,fig=true,echo=FALSE,eval=TRUE>>=
 ### for each parameter set, use the no prey control 
 ### to get the sd for each simulation
@@ -329,10 +337,15 @@ param.col <- apply(cbind(param.col,d.scaled),1,function(x) add.alpha(x[1],x[2]))
 mmO2 <- apply(difO2,1,max) - apply(difO2,1,min)
 }
 
-plot(varO2~mmO2,pch=19,cex=(1.5*b.scaled)^2,col=param.col)
+plot(varO2~mmO2,pch=19,cex=(1.5*b.scaled)^2,col=param.col,
+       xlab=expression('Max-Min O'[2]),ylab=expression('Var O'[2]))
 
 @
 
+\captionof{figure}{The variance and range of the $O_2$ dynamics were
+  affected by prey mass (\textit{w}) added (color: red = 0 to blue=10), the decomposition rate ($\beta$) (size: smallest = 0.001 to largest = 0.011) and the inflection point (\textit{d}) of $O_2$ augmentation (opacity: lightest = -5 to darkest = 5).}
+
+\end{center}
 \end{block}
 
 %----------------------------------------------------------------------------------------
