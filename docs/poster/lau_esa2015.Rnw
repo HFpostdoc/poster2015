@@ -37,7 +37,7 @@
 \graphicspath{{figures/}} % Location of the graphics files
 \usepackage{booktabs} % Top and bottom rules for table
 \usepackage[font=small,labelfont=bf]{caption} % Required for specifying captions to tables and figures 
-\usepackage{amsfonts,
+ \usepackage{amsfonts,
   amsmath, amsthm, amssymb} % For math fonts, symbols and environments
 \usepackage{wrapfig} % Allows wrapping text around tables and figures
 
@@ -104,7 +104,7 @@ Email: \texttt{matthewklau@fas.harvard.edu}\\ % Email address
     \item Sensitivity analysis revealed parameter combinations that
       produce alternative ecosystem states
     \item Differences in photosynthesis and decomposition rates lead
-      to both alternative states and hyesteresis,
+      to both alternative states and hysteresis,
     \end{enumerate}
   \item These results support previous findings that the timing of
     processes can lead to shifts in ecosystem state. 
@@ -178,7 +178,7 @@ Nutrient Release & $n_t = \frac{w_t x_t}{c}$ \\
 \subsection*{Sensitivity Analysis Simulations}
 
 Because the micro-ecosystem model is a coupled, non-linear dynamic
-equation, we conducted simulations in which we variaed three key
+equation, we conducted simulations in which we varied three key
 parameters in the model: $w$ the prey mass added, $\beta$ the
 decomposition rate and $d$ the inflection point of the nutrient
 augmentation function. 
@@ -229,7 +229,7 @@ par(op)
 
 \captionof{figure}{The pitcher plant micro-ecosystem model exhibited several
 behaviors similar to those of real \textit{S. purpurea} pitcher
-plants, including: dirunal cycling of $O_2$ and 48 hours to complete
+plants, including: diurnal cycling of $O_2$ and 48 hours to complete
 decomposition of prey (inset plot), altered $O_2$ production with prey
 addition (grey region), hysteresis occurs when prey addition stops
 (time = 9360 min).}
