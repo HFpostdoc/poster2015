@@ -229,8 +229,8 @@ par(op)
 
 \captionof{figure}{The pitcher plant micro-ecosystem model exhibited several
 behaviors similar to those of real \textit{S. purpurea} pitcher
-plants, including: diurnal cycling of $O_2$ and 48 hours to complete
-decomposition of prey (inset plot), altered $O_2$ production with prey
+plants, including: diurnal cycling of O$_2$ and 48 hours to complete
+decomposition of prey (inset plot), altered O$_2$ production with prey
 addition (grey region), hysteresis occurs when prey addition stops
 (time = 9360 min).}
  
@@ -296,8 +296,8 @@ plot(varO2~mmO2,pch=19,cex=(1.5*b.scaled)^2,col=param.col,
 
 @
 
-\captionof{figure}{The variance and range of the $O_2$ dynamics were
-  affected by prey mass (\textit{w}) added (color: red = 0 to blue=10), the decomposition rate ($\beta$) (size: smallest = 0.001 to largest = 0.011) and the inflection point (\textit{d}) of $O_2$ augmentation (opacity: lightest = -5 to darkest = 5).}
+\captionof{figure}{The variance and range of the O$_2$ dynamics were
+  affected by prey mass (\textit{w}) added (color: red = 0 to blue=10), the decomposition rate ($\beta$) (size: smallest = 0.001 to largest = 0.011) and the inflection point (\textit{d}) of O$_2$ augmentation (opacity: lightest = -5 to darkest = 5).}
 
 \end{center}
 \end{block}
